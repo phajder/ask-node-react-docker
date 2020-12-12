@@ -1,0 +1,29 @@
+{
+  "name": "ask2020-node-cicd",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "#"
+  },
+  "main": "src",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon -r dotenv/config .",
+    "test": "mocha -r dotenv/config --exit tests"
+  },
+  "author": "Piotr Hajder <phajder@agh.edu.pl>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.10"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "dotenv": "^8.2.0",
+    "mocha": "^7.1.2",
+    "nodemon": "^2.0.3"
+  }
+}
