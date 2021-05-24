@@ -5,6 +5,7 @@ import axios from 'axios';
 import { ActionButton } from '../';
 import { Products } from '../';
 import logo from './logo.svg';
+import M from 'materialize-css';
 
 class Layout extends Component {
     constructor(props) {
@@ -37,23 +38,42 @@ class Layout extends Component {
 
     render() {
         const { products } = this.state;
+		document.addEventListener('DOMContentLoaded', function() {
+			var elems = document.querySelectorAll('.sidenav');
+		    var instances = M.Sidenav.init(elems);
+		});
         return (
-            <div className="container">
-                <nav>
-                    <div className="nav-wrapper indigo accent-2">
-                        <a href="#!" className="brand-logo">
-                            <img src={logo} className="logo-image" alt="logo" width={80}/>
-                        </a>
-                        <ul className="right hide-on-med-and-down">
-                            <li><ActionButton callback={this.loadData} icon="cloud" text="Load data"/></li>
-                            <li><ActionButton callback={this.flushData} icon="delete" text="Flush data"/></li>
-                        </ul>
-                    </div>
-                </nav>
-                <div className="row">
-                    <Products products={products}/>
-                </div>
-            </div>
+			<>
+			<header>
+				<nav className="top-nav indigo accent-2">
+					<div className="container">
+						<div className="nav-wrapper">
+							<div className="row">
+								<a href="#" data-target="slide-out" className="top-nav sidenav-trigger brand-logo">
+									<img src={logo} className="logo-image" alt="logo" width={80}/>
+								</a>
+								<ul className="right hide-on-med-and-down">
+									<li><ActionButton callback={this.loadData} icon="cloud" text="Load data"/></li>
+									<li><ActionButton callback={this.flushData} icon="delete" text="Flush data"/></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</nav>
+				<ul id="slide-out" class="sidenav sidenav-close">
+					<li><ActionButton callback={this.loadData} icon="cloud" text="Load data"/></li>
+					<li><ActionButton callback={this.flushData} icon="delete" text="Flush data"/></li>
+				</ul>
+			</header>
+			
+			<main>
+				<div className="container">
+					<div className="row">
+						<Products products={products}/>
+					</div>
+				</div>
+			</main>
+			</>
         );
     }
 }
