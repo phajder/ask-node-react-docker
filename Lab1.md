@@ -3,7 +3,7 @@
 ---
 
 # Lab1
-**Cel ćwiczenia: Przygotowanie środowiska deweloperskiego dla rozproszonej aplikacji webowej**
+**Cel ćwiczenia: Przygotowanie zdalnego środowiska deweloperskiego dla rozproszonej aplikacji webowej**
 
 ## Uruchomienie platformy AWS Academy
 1. Zaloguj się do platformy AWS Academy. Każdy powinien otrzymać zaproszenie na uczelniany adres mailowy. 
@@ -14,13 +14,13 @@
 2. Z zakładki dashboard wejdź do kursu PH summer 2022/23 (Learner lab) i wybierz sekcję modules. Znajdują się w niej materiały przedstawiające korzystanie z platformy (Student Guide.pdf), terminal z dostępem do AWS (Learner lab) oraz ankieta podsumowująca (ja nie widzę wyników).
 3. Uruchom konsolę wchodząc w Learner lab. Może być wymagane wyrażenie zgody na warunki korzystania z usługi. Rezultat, będący początkiem ćwiczenia, przedstawiono na poniższym rysunku.
 
-    ![Learner lab console](res/learner-lab-console.png)
+    ![Learner lab console](/res/learner-lab-console.png)
 4. By rozpocząć pracę z platformą, należy wystartować lab przyciskiem _Start lab_. Gdy przy linku do AWS zapali się zielona kontrolka, platforma jest gotowa do pracy. **UWAGA! Po zakończeniu pracy proszę wyłączać platformę przyciskiem _End lab_, by uniknąć niepotrzebnego wykorzystania środków**.
 
 5. Wszelkie uwagi co do korzystania z platformy zostały zapisane w sekcji Readme, wyświetlanej domyślnie. Gdy nie jest ona widoczna, należy nacisnąć przycisk _Readme_.
 
 ## Zadania
-### Tworzenie maszyny wirtualnej w usłudze EC2
+### Tworzenie maszyny wirtualnej w usłudze EC2 [2.5 pkt]
 1. Włącz konsolę AWS wciskając przycisk _AWS_. Nastąpi przekierowanie do konsoli webowej chmury Amazona.
 2. Wejdź w usługę EC2. 
 3. Stwórz parę kluczy w usłudze EC2, sekcja _Network & Security -> Key Pairs_. Zostanie ona wykorzystana do połączenia się z maszyną wirtualną, stworzoną w kolejnym kroku.
@@ -30,8 +30,8 @@
     - **UWAGA! Klucz prywatny można pobrać tylko przy tworzeniu. Później nie jest to możliwe. Jego zgubienie skutkuje permanentnym zablokowaniem dostępu do maszyny.**
 4. Po stworzeniu klucza nastąpi jego pobranie. Zapisz go w _bezpiecznym_ miejscu, oznaczonym jako <ścieżka_klucza_prywatnego>. By klucz mógł zostać wykorzystany przez kliena openssh, musi mieć uprawnienia 600.
 5. Przejdź do sekcji _EC2 Dashboard_ w usłudze EC2 i stwórz nową instancję przyciskiem _Launch instance_ Parametry:
-    - System operacyjny: według preferencji.
-    - Typ instancji: t2.micro lub t2.small.
+    - System operacyjny: według preferencji. Jeżeli Amazon Linux - proszę wybrać Amazon Linux 2.
+    - Typ instancji: t2.small.
     - Para kluczy: <nazwa_pary_kluczy>.
     - Security group: stwórz tak, aby umożliwiała dostęp na porcie SSH.
     - Rozmiar i typ przestrzeni dyskowej: gp3, 30 GB.
@@ -46,7 +46,7 @@
 
 ---
 
-### Przygotowanie środowiska deweloperskiego na maszynie wirtualnej
+### Przygotowanie środowiska deweloperskiego na maszynie wirtualnej [2.5 pkt]
 
 1. Zaloguj się do stworzonej w usłudze EC2 maszyny wirtualnej.
 2. Zainstaluj oprogramowanie niezbędne do uruchomienia aplikacji:
@@ -62,7 +62,7 @@
 
 ---
 
-### Uruchomienie aplikacji
+### Uruchomienie aplikacji [2.5 pkt]
 1. W VS Code (lub innym IDE) uruchom terminal. Polecenia wykonane zostaną na maszynie wirtualnej.
 2. Zweryfikuj czy baza danych jest uruchomiona (w systemach z systemd: `systemctl status mysql`).
 3. Zaimportuj dane do bazy poleceniem:
@@ -74,19 +74,21 @@
     ```bash
     mysql -udockerdb -p
     ```
-    Hasło znajduje się w [zrzucie bazy danych](./db/db.sql#L19). Jeżeli logowanie przejdzie poprawnie, baza została zaimportowana.
+    Hasło znajduje się w [zrzucie bazy danych](/db/db.sql#L19). Jeżeli logowanie przejdzie poprawnie, baza została zaimportowana.
 5. Przejdź do katalogu z aplikacją backendową (server).
 6. Zainstaluj zależności projektu poleceniem `npm install`.
 7. Po instalacji zależności, uruchom aplikację w formie deweloperskiej (nodemon) poleceniem `npm run dev`.
 8. Jeżeli aplikacja została uruchomiona, w terminalu wyświetli się komunikat o nasłuchiwaniu na konkretnym porcie.
 
-### Część problemowa
+### Część problemowa [2.5 pkt]
 Weryfikację tej części należy opisać i uzasadnić podejmowane kroki.
 
 1. Sprawdź w przeglądarce, czy aplikacja backendowa działa. Adres: http://<publiczny_adres>:8080/api.
 2. Sprawdź, czy działa połączenie aplikacji backendowej z bazą danych. Adres: http://<publiczny_adres>:8080/api/products. Wyświetlić powinna się lista produktów.
-3. Uruchom aplikację frontendową w trybie deweloperskim. Wykorzystaj polecenie `npm start`.
+3. Uruchom aplikację frontendową (katalog [client](/client/)) w trybie deweloperskim. Wykorzystaj polecenie `npm start`.
 4. W jaki sposób zbudować i uruchomić wersje produkcyjne aplikacji frontendowej oraz backendowej? Czy są jakieś różnice?
+
+Tip do zadań 1-2: należy dokonać zmian w Security groupie przydzielonej do maszyny wirtualnej na EC2.
 
 ---
 
@@ -96,3 +98,10 @@ Weryfikację tej części należy opisać i uzasadnić podejmowane kroki.
 3. Sprawozdanie nie musi być bardzo szczegółowe, jednak powinno odzwierciedlać sekwencję wykonywanych kroków oraz uzasadnienie, co i dlaczego się stało.
 4. Sprawozdanie należy umieścić na platformie UPEL do następnych zajęć.
 5. Pozostałe dwa laboratoria wymagają wiedzy z tego ćwiczenia, gdyż będą wykorzystywać tą samą aplikację.
+
+---
+
+# Linki
+1. Instalacja nodejs na Amazon Linux - https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html.
+2. Private key too open on Windows - https://superuser.com/questions/1296024/windows-ssh-permissions-for-private-key-are-too-open
+3. Otwieranie/zamykanie portów w AWS: Security groups - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html
