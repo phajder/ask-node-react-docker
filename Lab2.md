@@ -24,6 +24,7 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
     ```bash
     docker ps
     ```
+7. Skolnuj to repozytorium i przejdź do jego katalogu głównego (ask-node-react-docker, nazwa repozytorium).
 
 ---
 
