@@ -54,10 +54,10 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
     - _Nie kopiuj_ kodu źródłowego!
 3. Zbuduj obraz poleceniem `docker build -t <obraz_backendu>:0.1 .` w katalogu server.
 4. Uruchom kontener z backendem poleceniem `docker run`. Uwzględnij:
-    - Wykorzystaj zmienne środowiskowe w pliku .env (-e lub --env-file).
-    - Zmapuj kod źródłowy aplikacji jako wolumin do kontenera (-v i/lub `docker volume`).
     - Uruchom kontener tak, by nie blokował konsoli (deatched, -d).
     - Na potrzeby testów możesz opublikować port (-p), by zweryfikować poprawność działania aplikacji.
+    - Wykorzystaj zmienne środowiskowe w pliku .env (-e lub --env-file).
+    - Zmapuj kod źródłowy aplikacji jako wolumin do kontenera (-v i/lub `docker volume`).
 5. Sprawdź, czy kontener jest uruchomiony i zweryfikuj poprawność jego działania, odwołując się do endpointu /api, który powinien zwrócić obiekt JSON z tekstem _Hello world!_.
 6. Zmodyfikuj treść komunikatu zwracanego przez endpoint /api w pliku [api/index.js](/server/src/api/index.js#L8). Zapisz plik.
 7. Jeżeli endpoint zwraca zmieniony tekst, wszystkie czynności zostały wykonane prawidłowo.
@@ -71,9 +71,11 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
     - _Nie kopiuj_ kodu źródłowego!
 3. Zbuduj obraz poleceniem `docker build -t <obraz_frontendu>:0.1` w katalogu client.
 4. Uruchom kontener z frontendem poleceniem `docker run`. Uwzględnij:
-    - Zmapuj kod źródłowy aplikacji jako wolumin do kontenera (-v i/lub `docker volume`).
-    - Uruchom kontener tak, by nie blokował konsoli (detached, -d).
+    - Uruchom kontener tak, by nie blokował konsoli (deatched, -d).
     - Opublikuj port (-p). Domyślny port aplikacji to 3000. Zmapuj go na 3333.
+    - By klient uruchomił się poprawnie, niezbędne jest ustawienie zmiennej CI=true (-e).
+    - Zmapuj kod źródłowy aplikacji z katalogu src jako wolumin do kontenera (-v).
+    - Zmapuj katalog public jako wolumin do kontenera (-v).
 5. Sprawdź, czy kontener jest uruchomiony i zweryfikuj poprawność jego działania, wchodząc pod adres maszyny (lub localhost przy port-forwardingu z VS Code) na port 3333.
 6. Zmodyfikuj tekst dowolnego z dwóch przycisków: [_Load data_](/client/src/components/Layout/Layout.jsx#L64) lub [_Flush data_](/client/src/components/Layout/Layout.jsx#L65). Zapisz plik.
 7. Jeżeli wyświetli się logo Reacta i dwa przyciski (mogą być ukryte po naciśnięciu logo) ze zmienionym tekstem, czynności zostały wykonane prawidłowo.
