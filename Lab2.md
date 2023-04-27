@@ -69,7 +69,7 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
 2. W katalogu client stwórz plik Dockerfile i uzupełnij go odpowiednimi instrukcjami pozwalającymi na uruchomienie.
     - Jako polecenie wykonawcze (CMD/ENTRYPOINT) wskaż `npm start`
     - _Nie kopiuj_ kodu źródłowego!
-3. Zbuduj obraz poleceniem `docker build -t <obraz_frontendu>:0.1` w katalogu client.
+3. Zbuduj obraz poleceniem `docker build -t <obraz_frontendu>:0.1 .` w katalogu client.
 4. Uruchom kontener z frontendem poleceniem `docker run`. Uwzględnij:
     - Uruchom kontener tak, by nie blokował konsoli (deatched, -d).
     - Opublikuj port (-p). Domyślny port aplikacji to 3000. Zmapuj go na 3333.
