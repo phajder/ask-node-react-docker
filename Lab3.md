@@ -15,6 +15,7 @@
     - backend: ma zawierać kontenery backendu oraz bazy danych
     - frontend: ma zawierać kontenery frontendu i backendu.
 3. [1 pkt] Ustaw customową adresację stworzonych sieci. Za `x` podstaw wartość obliczoną wg wzoru: `numer_albumu mod 200`. Jeżeli adresacja koliduje z adresacją w sieci lokalnej (labowej lub domowej), zmień na inną.
+    ![custom-networks](/res/docker-compose-network.svg)
 4. [2 pkt] Zbuduj produkcyjną wersję aplikacji frontendowej:
     - Stwórz nowy Dockerfile, w którym aplikacja zostanie uruchomiona w wersji produkcyjnej.
     - Wykorzystaj [multi-stage build](https://docs.docker.com/build/building/multi-stage/), by zbudować aplikację:
@@ -23,7 +24,6 @@
     - Plik nginx.conf powinien znaleźć się w kontenerze pod ścieżką `/etc/nginx/nginx.conf`
     - Do testowania prawidłowości działania kontenera opartego o nowy obraz można zakomentować sekcję upstream.
     - Zweryfikuj prawidłowość działania aplikacji, wchodząc w przeglądarkę na port 80 pod adresem maszyny, na której jest ona hostowana.
-    ![custom-networks](/res/docker-compose-network.svg)
 5. [2 pkt] Przygotuj wersję produkcyjną aplikacji z wykorzystaniem docker-compose:
     - Stwórz osobny plik docker-compose.production.yml i zawrzyj w nim konfigurację.
     - Zmodyfikuj [nazwę hosta i port w upstreamie](/client/nginx.conf#L15).
