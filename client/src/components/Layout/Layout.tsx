@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import { ActionButton, Products } from "../";
+import { ActionButton, Products } from "@/components";
 import logo from "./logo.svg";
 
 export default function Layout() {
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
 
   async function loadData() {
     try {
@@ -16,7 +16,7 @@ export default function Layout() {
   }
 
   function flushData() {
-    setProducts(null);
+    setProducts([]);
   }
 
   return (
