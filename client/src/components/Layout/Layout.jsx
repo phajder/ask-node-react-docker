@@ -1,16 +1,10 @@
 import { useState } from "react";
 
-import M from "materialize-css";
 import { ActionButton, Products } from "../";
 import logo from "./logo.svg";
 
 export default function Layout() {
   const [products, setProducts] = useState(null);
-
-  document.addEventListener("DOMContentLoaded", function () {
-    var elems = document.querySelectorAll(".sidenav");
-    var instances = M.Sidenav.init(elems);
-  });
 
   async function loadData() {
     try {
