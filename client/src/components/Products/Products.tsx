@@ -3,7 +3,6 @@ import {
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -26,8 +25,8 @@ export default function Products({ products }: ProductProps) {
         <TableCaption>A list of available products.</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Id</TableHead>
-            <TableHead>Product name</TableHead>
+            <TableHead className="w-[150px]">Id</TableHead>
+            <TableHead className="">Product name</TableHead>
             <TableHead className="text-right">Price</TableHead>
           </TableRow>
         </TableHeader>
@@ -37,7 +36,7 @@ export default function Products({ products }: ProductProps) {
               return (
                 <TableRow>
                   <TableCell className="font-medium">{p.id}</TableCell>
-                  <TableCell>{p.productName}</TableCell>
+                  <TableCell className="">{p.productName}</TableCell>
                   <TableCell className="text-right">{p.price}</TableCell>
                 </TableRow>
               );

@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import { App } from "./containers";
 import reportWebVitals from "./reportWebVitals";
 
-import "materialize-css/dist/css/materialize.min.css";
-import "materialize-css/dist/js/materialize.min.js";
+// import "materialize-css/dist/css/materialize.min.css";
+// import "materialize-css/dist/js/materialize.min.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
