@@ -34,7 +34,7 @@ export default function Products({ products }: ProductProps) {
           {products &&
             Object.values(products).map((p) => {
               return (
-                <TableRow>
+                <TableRow className="hover:text-teal-400">
                   <TableCell className="font-medium">{p.id}</TableCell>
                   <TableCell className="">{p.productName}</TableCell>
                   <TableCell className="text-right">{p.price}</TableCell>

@@ -6,24 +6,6 @@
 
 **Cel ćwiczenia: Wykorzystanie konteneryzacji do stworzenia zdalnego środowiska deweloperskiego dla rozproszonej aplikacji webowej na przykładzie platformy Docker**
 
-## Uruchomienie platformy AWS Academy
-
-1. Zaloguj się do platformy AWS Academy. Każdy powinien otrzymać zaproszenie na uczelniany adres mailowy.
-
-   Dane dostępowe:
-
-   - login: <nr_indeksu>@student.agh.edu.pl
-   - password: ustalony przy rejestracji
-
-2. Z zakładki dashboard wejdź do kursu PH summer 2022/23 (Learner lab) i wybierz sekcję modules. Znajdują się w niej materiały przedstawiające korzystanie z platformy (Student Guide.pdf), terminal z dostępem do AWS (Learner lab) oraz ankieta podsumowująca (ja nie widzę wyników).
-3. Uruchom konsolę wchodząc w Learner lab. Może być wymagane wyrażenie zgody na warunki korzystania z usługi. Rezultat, będący początkiem ćwiczenia, przedstawiono na poniższym rysunku.
-
-   ![Learner lab console](/res/learner-lab-console.png)
-
-4. By rozpocząć pracę z platformą, należy wystartować lab przyciskiem _Start lab_. Gdy przy linku do AWS zapali się zielona kontrolka, platforma jest gotowa do pracy. **UWAGA! Po zakończeniu pracy proszę wyłączać platformę przyciskiem _End lab_, by uniknąć niepotrzebnego wykorzystania środków**.
-
-5. Wszelkie uwagi co do korzystania z platformy zostały zapisane w sekcji Readme, wyświetlanej domyślnie. Gdy nie jest ona widoczna, należy nacisnąć przycisk _Readme_.
-
 ## Zadania
 
 **UWAGA! W ćwiczeniu należy korzystać wyłącznie z systemów Linuxowych**
@@ -72,7 +54,7 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
 1. Pobierz obraz nodejs z repozytorium DockerHub na maszynę. Wersja powinna być nie wyższa niż 16.
 2. W katalogu server stwórz plik Dockerfile i uzupełnij go odpowiednimi instrukcjami, pozwalającymi na uruchomienie aplikacji.
    - Jako polecenie wykonawcze (CMD/ENTRYPOINT) wskaż `npm run dev`.
-   - _Nie kopiuj_ kodu źródłowego!
+   - **Nie kopiuj** kodu źródłowego!
 3. Zbuduj obraz poleceniem `docker build -t <obraz_backendu>:0.1 .` w katalogu server.
 4. Uruchom kontener z backendem poleceniem `docker run`. Uwzględnij:
    - Uruchom kontener tak, by nie blokował konsoli (deatched, -d).
@@ -90,16 +72,16 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
 1. Pobierz lub wykorzystaj obraz nodejs z poprzedniej części. Wersja powinna być nie wyższa niż 16.
 2. W katalogu client stwórz plik Dockerfile i uzupełnij go odpowiednimi instrukcjami pozwalającymi na uruchomienie.
    - Jako polecenie wykonawcze (CMD/ENTRYPOINT) wskaż `npm start`
-   - _Nie kopiuj_ kodu źródłowego!
+   - **Nie kopiuj** kodu źródłowego!
 3. Zbuduj obraz poleceniem `docker build -t <obraz_frontendu>:0.1 .` w katalogu client.
 4. Uruchom kontener z frontendem poleceniem `docker run`. Uwzględnij:
    - Uruchom kontener tak, by nie blokował konsoli (deatched, -d).
-   - Opublikuj port (-p). Domyślny port aplikacji to 3000. Zmapuj go na 3333.
+   - Opublikuj port (-p). Domyślny port aplikacji to 3000. Zmapuj go 3333.
    - By klient uruchomił się poprawnie, niezbędne jest ustawienie zmiennej CI=true (-e).
    - Zmapuj kod źródłowy aplikacji z katalogu src jako wolumin do kontenera (-v).
    - Zmapuj katalog public jako wolumin do kontenera (-v).
 5. Sprawdź, czy kontener jest uruchomiony i zweryfikuj poprawność jego działania, wchodząc pod adres maszyny (lub localhost przy port-forwardingu z VS Code) na port 3333.
-6. Zmodyfikuj tekst dowolnego z dwóch przycisków: [_Load data_](/client/src/components/Layout/Layout.jsx#L30) lub [_Flush data_](/client/src/components/Layout/Layout.jsx#L35). Zapisz plik.
+6. Zmodyfikuj tekst dowolnego z dwóch przycisków: [_Load data_](/client/src/components/Layout/Layout.tsx#L30) lub [_Flush data_](/client/src/components/Layout/Layout.tsx#L35). Zapisz plik.
 7. Jeżeli wyświetli się logo Reacta i dwa przyciski (mogą być ukryte po naciśnięciu logo) ze zmienionym tekstem, czynności zostały wykonane prawidłowo.
 
 ---
@@ -115,7 +97,7 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
    - Aplikacja wykorzystuje wewnętrzny serwer proxy. Adres backendu, do którego proxowane są zapytania znajduje się w pliku [package.json](/client/package.json#L9) klienta.
    - Niektóre zmiany mogą wymagać ponownego stworzenia kontenera. Jeżeli to konieczne, usuń niewłaściwy i stwórz nowy.
 5. Zweryfikuj poprawność połączenia poprzez załadowanie danych przyciskiem _Load data_. Finalny rezultat:
-   ![ui-preview](res/ui-preview.png)
+   ![ui-preview](/res/ui-preview.png)
 6. Jeżeli obydwa przyciski działają prawidłowo i wszystkie aplikacje uruchomione zostały jako kontenery dockera, wszystkie czynności w ramach tego ćwiczenia zostały wykonane prawidłowo.
 
 Tip: Do wykonania tej sekcji przydatne będzie utworzenie własnej sieci w dockerze poleceniem `docker network` (lepsze rozwiązanie) lub `docker inspect` jeżeli kontenery umieszczone zostały w domyślnej sieci (gorsze rozwiązanie).

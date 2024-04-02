@@ -12,14 +12,27 @@ http {
     default_type application-octet-stream;
 
     upstream backend {
-        server api-server:8080;
+        server ${API_ENDPOINT}:${API_PORT};
     }
 
     server {
         # Listen on port 80
-        listen 80;
+        listen ${NGINX_PORT};
         # Logs dir
         access_log /var/log/nginx/access.log;
+
+        recursive_error_pages   on;
+
+        # all of the status defined at http.cat AND allowed by nginx to be error_page'd
+
+        error_page 404 /status-error.html;
+
+        location /status-error.html {
+            resolver 1.1.1.1 ipv6=off;
+            proxy_ssl_server_name on;
+            proxy_pass https://http.cat/$status;
+            internal;
+        }
 
         # Root directory
         root /usr/share/nginx/html;
@@ -31,7 +44,7 @@ http {
             # First attempt to serve request as file,
             # then as directory,
             # then fall back to redirecting to index.html
-            try_files $uri $uri/ /index.html;
+            try_files $uri $uri/ =404; #/index.html;
         }
 
         # Proxy to API server

@@ -23,8 +23,8 @@
    - Stwórz nowy Dockerfile, w którym aplikacja zostanie uruchomiona w wersji produkcyjnej.
    - Wykorzystaj [multi-stage build](https://docs.docker.com/build/building/multi-stage/), by zbudować aplikację:
      - Stage 1: node. Należy zbudować wersję produkcyjną poleceniem `npm run build`.
-     - Stage 2: nginx. Wykorzystaj plik konfiguracyjny [nginx.conf](/client/nginx.conf)
-   - Plik nginx.conf powinien znaleźć się w kontenerze pod ścieżką `/etc/nginx/nginx.conf`
+     - Stage 2: nginx. Wykorzystaj szablon pliku konfiguracyjnego [nginx.conf](/client/nginx.conf.template). Zwróć uwagę na zmienne środowiskowe, które należy ustawić.
+   - Docelowy plik nginx.conf powinien znaleźć się w kontenerze pod ścieżką `/etc/nginx/nginx.conf`. Tip: wykorzystaj zmienną środowiskową NGINX_ENVSUBST_OUTPUT_DIR.
    - Do testowania prawidłowości działania kontenera opartego o nowy obraz można zakomentować sekcję upstream.
    - Zweryfikuj prawidłowość działania aplikacji, wchodząc w przeglądarkę na port 80 pod adresem maszyny, na której jest ona hostowana.
 5. [2 pkt] Przygotuj wersję produkcyjną aplikacji z wykorzystaniem docker-compose:

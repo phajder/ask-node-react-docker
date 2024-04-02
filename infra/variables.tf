@@ -12,7 +12,7 @@ variable "api_port" {
 variable "react_port" {
   description = "Port for exposing react dev server"
   type        = number
-  default     = 3000
+  default     = 3333
 }
 
 variable "ec2_ami" {

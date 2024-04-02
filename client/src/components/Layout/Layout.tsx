@@ -21,7 +21,7 @@ export default function Layout() {
   }
 
   return (
-    <div className="h-full bg-zinc-950 text-white md:container md:mx-auto">
+    <div className="h-full md:container dark:bg-zinc-950 dark:text-white md:mx-auto">
       <div className="flex flex-1 justify-center">
         <nav className="pointer-events-auto md:block">
           <ul className="flex px-3 text-sm font-medium">
@@ -38,7 +38,6 @@ export default function Layout() {
           </ul>
         </nav>
       </div>
-
       <main className="flex min-h-screen flex-col items-center justify-start">
         <div className="max-auto container">
           <Products products={products} />

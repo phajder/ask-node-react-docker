@@ -2,6 +2,24 @@
 
 Na potrzeby niniejszego ćwiczenia przygotowano skrypt tworzący i konfigurujący maszynę wirtualną na chmurze AWS.
 
+## Uruchomienie platformy AWS Academy
+
+1. Zaloguj się do platformy AWS Academy. Każdy powinien otrzymać zaproszenie na uczelniany adres mailowy.
+
+   Dane dostępowe:
+
+   - login: <nr_indeksu>@student.agh.edu.pl
+   - password: ustalony przy rejestracji
+
+2. Z zakładki dashboard wejdź do kursu PH summer 2022/23 (Learner lab) i wybierz sekcję modules. Znajdują się w niej materiały przedstawiające korzystanie z platformy (Student Guide.pdf), terminal z dostępem do AWS (Learner lab) oraz ankieta podsumowująca (ja nie widzę wyników).
+3. Uruchom konsolę wchodząc w Learner lab. Może być wymagane wyrażenie zgody na warunki korzystania z usługi. Rezultat, będący początkiem ćwiczenia, przedstawiono na poniższym rysunku.
+
+   ![Learner lab console](/res/learner-lab-console.png)
+
+4. By rozpocząć pracę z platformą, należy wystartować lab przyciskiem _Start lab_. Gdy przy linku do AWS zapali się zielona kontrolka, platforma jest gotowa do pracy. **UWAGA! Po zakończeniu pracy proszę wyłączać platformę przyciskiem _End lab_, by uniknąć niepotrzebnego wykorzystania środków**.
+
+5. Wszelkie uwagi co do korzystania z platformy zostały zapisane w sekcji Readme, wyświetlanej domyślnie. Gdy nie jest ona widoczna, należy nacisnąć przycisk _Readme_.
+
 ## Instalacja terraforma
 
 Do uruchomienia skryptu należy zainstalować terraforma, zgodnie z [dokumentacją](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
@@ -15,6 +33,25 @@ terraform
 ### Pobieranie prekompilowanej binarki
 
 W przypadku braku możliwości instalacji oprogramowania (AWS Academy, laby), należy pobrać skompilowaną binarkę terraforma, dostępną na [stronie](https://developer.hashicorp.com/terraform/install). Jeżeli dostęp do maszyny jest wyłącznie zdalny, należy wówczas wykorzystać terminalowe polecenia,np. curl czy wget. Po pobraniu należy wypakować binarkę do katalogu _infra_.
+
+## Konfiguracja kluczy AWS
+
+Platforma AWS Academy ma przygotowane odpowiednio klucze w konsoli. Jednak by skonfigurować prawidłowo terraforma na własnej maszynie, należy skopiować klucze do AWS API z tej platformy.
+
+Są one dostępne w sekcji _AWS Details_, przycisk _Show_ przy AWS CLI. Zawartość należy, zgodnie z opisem na platformie, skopiować w odpowiednie miejsce katalogu domowego: ~/.aws/credentials.
+
+![AWS CLI credentials](/res/aws-academy-credentials.png)
+
+Warto też stworzyć plik ~/.aws/config o następującej zawartości:
+
+```
+[default]
+region = us-east-1
+```
+
+Jeżeli w katalogu domowym znajdują się inne profile do AWS CLI, należy zmienić nazwę, aby były one unikalne.
+
+**UWAGA!** Klucz ten jest sesyjny - po upływie czasu lub deaktywacji labu na platformie AWS Academy są one zmieniane i proces kopiowania należy przeprowadzić ponownie, przed przystąpieniem do tworzenia infrastruktury.
 
 ## Konfiguracja środowiska deweloperskiego
 
