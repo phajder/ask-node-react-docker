@@ -18,5 +18,5 @@ variable "react_port" {
 variable "ec2_ami" {
   description = "Selected AMI for vm's image"
   type        = string
-  default     = "ami-0c101f26f147fa7fd"
+  default     = "ami-080e1f13689e07408"
 }
