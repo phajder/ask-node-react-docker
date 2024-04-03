@@ -22,23 +22,74 @@ Na potrzeby niniejszego ćwiczenia przygotowano skrypt tworzący i konfigurując
 
 ## Instalacja terraforma
 
-Do uruchomienia skryptu należy zainstalować terraforma, zgodnie z [dokumentacją](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
-
-Po instalacji należy sprawdzić, czy polecenie działa prawidłowo, np. wywołując je z terminala.
-
-```bash
-terraform
-```
+Jeżeli środowisko do pracy pozwala na instalację oprogramowania, należy zainstalować terraforma, zgodnie z [dokumentacją](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli). W przeciwnym przypadku należy przejść do kolejnej sekcji.
 
 ### Pobieranie prekompilowanej binarki
 
-W przypadku braku możliwości instalacji oprogramowania (AWS Academy, laby), należy pobrać skompilowaną binarkę terraforma, dostępną na [stronie](https://developer.hashicorp.com/terraform/install). Jeżeli dostęp do maszyny jest wyłącznie zdalny, należy wówczas wykorzystać terminalowe polecenia,np. curl czy wget. Po pobraniu należy wypakować binarkę do katalogu _infra_.
+W przypadku braku możliwości instalacji oprogramowania (AWS Academy, komputery labowe), należy pobrać skompilowaną binarkę terraforma, dostępną na [stronie](https://developer.hashicorp.com/terraform/install). **Jeżeli dostęp do maszyny jest wyłącznie zdalny, należy wykorzystać terminalowe polecenia, np. curl czy wget.** Po pobraniu najlepiej rozpakować ją do katalogu `~/.local/bin`. Jeżeli nie istnieje, należy go stworzyć poleceniem `mkdir -p ~/.local/bin`.
+
+By działała z dowolnego miejsca, należy dodać ścieżkę do niej do zmiennej PATH. Dla powłoki bash (weryfikacja poprzez polecenie `echo $0`):
+
+```bash
+echo "export PATH=\$PATH:~/.local/bin" >> ~/.bashrc
+```
+
+Należy zrestartować sesję, by polecenie zadziałało, np. ponowne włączenie terminala lub przeładowanie strony w przeglądarce (AWS Academy). Można też użyć polecenia `source ~/.bashrc`.
+
+**UWAGA!** W przypadku wykorzystywania innej powłoki niż bash konieczna jest zmiana pliku rc na odpowiedni, np. `~/.zshrc` dla zsh.
+
+### Weryfikacja poprawności działania terraforma
+
+Po instalacji należy sprawdzić, czy polecenie działa prawidłowo, np. wywołując je z terminala. Powinien zwrócić następujący output:
+
+```bash
+➜  ~ terraform
+Usage: terraform [global options] <subcommand> [args]
+
+The available commands for execution are listed below.
+The primary workflow commands are given first, followed by
+less common or more advanced commands.
+
+Main commands:
+  init          Prepare your working directory for other commands
+  validate      Check whether the configuration is valid
+  plan          Show changes required by the current configuration
+  apply         Create or update infrastructure
+  destroy       Destroy previously-created infrastructure
+
+All other commands:
+  console       Try Terraform expressions at an interactive command prompt
+  fmt           Reformat your configuration in the standard style
+  force-unlock  Release a stuck lock on the current workspace
+  get           Install or upgrade remote Terraform modules
+  graph         Generate a Graphviz graph of the steps in an operation
+  import        Associate existing infrastructure with a Terraform resource
+  login         Obtain and save credentials for a remote host
+  logout        Remove locally-stored credentials for a remote host
+  metadata      Metadata related commands
+  output        Show output values from your root module
+  providers     Show the providers required for this configuration
+  refresh       Update the state to match remote systems
+  show          Show the current state or a saved plan
+  state         Advanced state management
+  taint         Mark a resource instance as not fully functional
+  test          Execute integration tests for Terraform modules
+  untaint       Remove the 'tainted' state from a resource instance
+  version       Show the current Terraform version
+  workspace     Workspace management
+
+Global options (use these before the subcommand, if any):
+  -chdir=DIR    Switch to a different working directory before executing the
+                given subcommand.
+  -help         Show this help output, or the help for a specified subcommand.
+  -version      An alias for the "version" subcommand.
+```
 
 ## Konfiguracja kluczy AWS
 
-Platforma AWS Academy ma przygotowane odpowiednio klucze w konsoli. Jednak by skonfigurować prawidłowo terraforma na własnej maszynie, należy skopiować klucze do AWS API z tej platformy.
+Platforma AWS Academy ma przygotowane odpowiednio klucze w konsoli. Jeżeli na niej wykonywane jest tworzenie maszyny za pomocą terraforma, należy przejść do następnej sekcji.
 
-Są one dostępne w sekcji _AWS Details_, przycisk _Show_ przy AWS CLI. Zawartość należy, zgodnie z opisem na platformie, skopiować w odpowiednie miejsce katalogu domowego: ~/.aws/credentials.
+By jednak skonfigurować prawidłowo terraforma na własnej maszynie, należy skopiować klucze do AWS API z tej platformy. Są one dostępne w sekcji _AWS Details_, przycisk _Show_ przy AWS CLI. Zawartość należy, zgodnie z opisem na platformie, skopiować w odpowiednie miejsce katalogu domowego: ~/.aws/credentials.
 
 ![AWS CLI credentials](/res/aws-academy-credentials.png)
 
@@ -67,15 +118,17 @@ ssh-keygen -t ed25519
 
 Klucz domyślnie znajduje się w katalogu ~/.ssh i będzie mieć nazwę id_ed25519, które można zmienić w trakcie generacji lub wykorzystując opcję -f. **W dalszej części opisu wykorzystano nazwę domyślną.**
 
-**UWAGA!** Na platformie AWS Academy klucz generuje się do _złego_ katalogu - podmontowany katalog do pracy różni się względem katalogu /home. Wówczas warto skorzystać z opcji -f.
+**UWAGA!** Na platformie AWS Academy klucz generuje się do _złego_ katalogu - katalog domowy (~) do pracy jest podmontowany do lokalizacji, która różni się od /home, gdzie keygen zapisuje parę kluczy. Wówczas warto skorzystać z opcji -f, które wygeneruje ją we _właściwym_ katalogu.
 
 ```bash
-ssh-keygen -t ed25519 -f id_ed25519
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
 ```
+
+Wygenerowany klucz można przenosić między maszynami i używać go do łączenia się z tworzoną wirtualką.
 
 ### Inicjalizacja terraforma
 
-W celu uruchomienia skryptu, należy zainicjalizować terraforma poleceniem _init_.
+W celu uruchomienia skryptu, w katalogu [infra](/infra) należy zainicjalizować terraforma poleceniem _init_.
 
 ```bash
 terraform init
@@ -96,7 +149,7 @@ terraform apply
 By móc stworzyć poprawnie zasoby, terraform poprosi o podanie klucza publicznego. Wówczas należy wkleić zawartość pliku klucza publicznego. Można również wskazać go podczas uruchamiania polecenia _apply_.
 
 ```bash
-terraform apply -var "public_key=$(<id_ed25519.pub)"
+terraform apply -var "public_key=$(< ~/.ssh/id_ed25519.pub)"
 ```
 
 Na ekranie wyświeli się plan tworzonej infrastruktury, który należy potwierdzić słowem **yes** (jest to wyjaśnione w trakcie wykonywania polecenia _apply_).
