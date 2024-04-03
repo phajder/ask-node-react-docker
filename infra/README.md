@@ -67,6 +67,12 @@ ssh-keygen -t ed25519
 
 Klucz domyślnie znajduje się w katalogu ~/.ssh i będzie mieć nazwę id_ed25519, które można zmienić w trakcie generacji lub wykorzystując opcję -f. **W dalszej części opisu wykorzystano nazwę domyślną.**
 
+**UWAGA!** Na platformie AWS Academy klucz generuje się do _złego_ katalogu - podmontowany katalog do pracy różni się względem katalogu /home. Wówczas warto skorzystać z opcji -f.
+
+```bash
+ssh-keygen -t ed25519 -f id_ed25519
+```
+
 ### Inicjalizacja terraforma
 
 W celu uruchomienia skryptu, należy zainicjalizować terraforma poleceniem _init_.
