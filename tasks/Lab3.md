@@ -12,9 +12,11 @@
 
 Aby wykonać ćwiczenie, należy mieć gotowy skrypt [`compose.yaml`](/compose.yaml) z [Lab2](/tasks/Lab2.md) oraz uruchomioną zgodnie z [opisem](/infra/README.md) maszynę wirtualną na AWS.
 
-### [2 pkt] Traefik Proxy
+---
 
-W pliku [`proxy/compose.yaml`](/proxy/compose.yaml) stwórz serwis Traefik Proxy:
+### Traefik Proxy [2 pkt]
+
+W pliku [proxy/compose.yaml](/proxy/compose.yaml) stwórz serwis Traefik Proxy:
 
 1. Obraz dostępny jest na [DockerHubie](https://hub.docker.com/_/traefik).
 2. Dashboard ma zostać udostępniony wyłącznie na lokalnym interfejsie.
@@ -23,24 +25,30 @@ W pliku [`proxy/compose.yaml`](/proxy/compose.yaml) stwórz serwis Traefik Proxy
 5. Sprawdź działanie dashboarda, wykorzystując port forwarding (ssh lub we wtyczce remote-ssh w VS Code).
 6. Przykłady konfiguracji znajdują się w [dokumentacji](https://doc.traefik.io/traefik/).
 
-### [1 pkt] DuckDNS domains
+---
+
+### DuckDNS domains [1 pkt]
 
 Stwórz dwie domeny w serwisie [DuckDNS](https://www.duckdns.org):
 
 1. Publiczną - jako nazwę przyjmij dowolnie wybraną przez siebie i dostępną nazwę. Przypisz jej publiczny adres maszyny wirtualnej na AWS.
 2. Lokalną - użyj tej samej nazwy z suffixem _-local_, np. phajder-local. Przypisz jej adres interfejsu loopback, tj. 127.0.0.1.
 
-### [2 pkt] Serwis dostępny publicznie - React client
+---
 
-Zmodyfikuj własny plik [`compose.yaml`](/compose.yaml), gdzie znajduje się aplikacja kliencka, tak aby Traefik automatycznie udostępnił serwis na zewnątrz.
+### Serwis dostępny publicznie - React client [2 pkt]
+
+Zmodyfikuj własny plik [compose.yaml](/compose.yaml), gdzie znajduje się aplikacja kliencka, tak aby Traefik automatycznie udostępnił serwis na zewnątrz.
 
 1. Serwis musi zostać umieszczony w sieci _proxy_, stworzonej w punkcie 1.
 2. Wskaż właściwy router Traefika, by usługa była dostępna publicznie.
 3. Sprawdź działanie poprzez wejście pod adres domeny publicznej.
 
-### [2 pkt] Serwis dostępny lokalnie - phpmyadmin
+---
 
-Dodaj usługę phpmyadmin do własnego pliku [`compose.yaml`](/compose.yaml):
+### Serwis dostępny lokalnie - phpmyadmin [2 pkt]
+
+Dodaj usługę phpmyadmin do własnego pliku [compose.yaml](/compose.yaml):
 
 1. Obraz dostępny jest na [DockerHubie](https://hub.docker.com/_/phpmyadmin).
 2. Połącz go z bazą danych w osobno stworzonej w tym celu sieci.
@@ -48,7 +56,9 @@ Dodaj usługę phpmyadmin do własnego pliku [`compose.yaml`](/compose.yaml):
 4. Skonfiguruj serwis tak, aby Traeifk udostępnił usługę pod domeną lokalną.
 5. Sprawdź działanie serwisu, wykorzystując port forwarding (ssh lub we wtyczce remote-ssh w VS Code).
 
-### [3 pkt] SSL Offloading with Traefik
+---
+
+### SSL Offloading with Traefik [3 pkt]
 
 Skonfiguruj Traefika i udostępniane serwisy, by włączyć SSL na obydwu domenach z wykorzystaniem certyfikatow Let's Encrypt:
 

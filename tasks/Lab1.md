@@ -12,6 +12,8 @@
 
 Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/engine/reference/commandline/cli/) oraz w [Docker cheat sheet](https://docs.docker.com/get-started/docker_cheatsheet.pdf).
 
+---
+
 ### Przygotowanie platformy [1 pkt]
 
 1. Stwórz maszynę wirtualną do pracy. Skorzystaj ze dostarczonego [opisu](/infra/README.md).
