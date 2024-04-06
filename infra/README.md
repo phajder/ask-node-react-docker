@@ -89,11 +89,11 @@ Global options (use these before the subcommand, if any):
 
 Platforma AWS Academy ma przygotowane odpowiednio klucze w konsoli. Jeżeli na niej wykonywane jest tworzenie maszyny za pomocą terraforma, należy przejść do następnej sekcji.
 
-By jednak skonfigurować prawidłowo terraforma na własnej maszynie, należy skopiować klucze do AWS API z tej platformy. Są one dostępne w sekcji _AWS Details_, przycisk _Show_ przy AWS CLI. Zawartość należy, zgodnie z opisem na platformie, skopiować w odpowiednie miejsce katalogu domowego: ~/.aws/credentials.
+By jednak skonfigurować prawidłowo terraforma na własnej maszynie, należy skopiować klucze do AWS API z tej platformy. Są one dostępne w sekcji _AWS Details_, przycisk _Show_ przy AWS CLI. Zawartość należy, zgodnie z opisem na platformie, skopiować w odpowiednie miejsce katalogu domowego: `~/.aws/credentials`.
 
 ![AWS CLI credentials](/res/aws-academy-credentials.png)
 
-Warto też stworzyć plik ~/.aws/config o następującej zawartości:
+Warto też stworzyć plik `~/.aws/config` o następującej zawartości:
 
 ```
 [default]

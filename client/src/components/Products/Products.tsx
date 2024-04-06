@@ -14,11 +14,7 @@ interface Product {
   price: number;
 }
 
-interface ProductProps {
-  products: Product[];
-}
-
-export default function Products({ products }: ProductProps) {
+const Products: React.FC<{ products: Product[] }> = ({ products }) => {
   return (
     <div className="product-container">
       <Table className="striped centered blue lighten-3">
@@ -45,4 +41,6 @@ export default function Products({ products }: ProductProps) {
       </Table>
     </div>
   );
-}
+};
+
+export default Products;

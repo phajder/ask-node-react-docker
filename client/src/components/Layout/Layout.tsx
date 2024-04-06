@@ -1,18 +1,26 @@
 import "../../styles/globals.css";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { ActionButton, Products } from "@/components";
+import { AlertsContext } from "../Alert/AlertContext";
+import { AlertContextType } from "@/@types/ask-client";
 
 export default function Layout() {
   const [products, setProducts] = useState([]);
+  const { addAlert } = useContext(AlertsContext) as AlertContextType;
 
   async function loadData() {
     try {
       let apiProducts = await fetch("/api/products");
+      if (!apiProducts?.ok) {
+        const message = await apiProducts.text();
+        throw Error(message?.length > 0 ? message : apiProducts.statusText);
+      }
       setProducts(await apiProducts.json());
     } catch (e) {
-      console.error(`Fetch failed: ${e}`);
+      addAlert({ title: "ERROR", message: (e as Error).message, timeout: 5 });
+      console.error((e as Error).message);
     }
   }
 
@@ -26,14 +34,10 @@ export default function Layout() {
         <nav className="pointer-events-auto md:block">
           <ul className="flex px-3 text-sm font-medium">
             <li>
-              <a className="relative block px-3 py-2 transition hover:text-teal-500" href="/">
-                <ActionButton callback={loadData} icon="cloud" text="Load data" />
-              </a>
+              <ActionButton callback={loadData} icon="cloud" text="Load data" />
             </li>
             <li>
-              <a className="relative block px-3 py-2 transition hover:text-teal-500" href="/">
-                <ActionButton callback={flushData} icon="delete" text="Flush data" />
-              </a>
+              <ActionButton callback={flushData} icon="delete" text="Flush data" />
             </li>
           </ul>
         </nav>
