@@ -209,6 +209,16 @@ Jeżeli maszyna została stworzona z innym systemem niż zdefiniowany w konfigur
 | Ubuntu 22.04 LTS   | ubuntu       |
 | Debian 12 Bookworm | admin        |
 
+### Odświeżanie stanu terraforma
+
+Po restarcie maszyny wirtualnej lub po ponownym włączeniu labu na AWS Academy, istnieje możliwość desynchronizacji stanu terraforma z chmurą AWS. By go odświeżyć, należy wykonać polecenie:
+
+```bash
+terraform refresh -var "public_key=$(<id_ed25519.pub)"
+```
+
+UWAGA! Należy wskazać odpowiednią ścieżkę do klucza publicznego!
+
 ### Pobieranie zmiennych terraforma
 
 Skrypt jako wyjście zwraca dwa adresy maszyny: prywatny oraz publiczny. O ile pierwszy jest niezmienny, o tyle drugi może zmienić się w dowolnym momencie, np. w wyniku restartu interfejsu, maszyny, jej migracji lub innych operacji po stronie dostawcy. By uzyskać te wartości można w dowolnym momencie wywołać polecenie _output_.
@@ -216,6 +226,8 @@ Skrypt jako wyjście zwraca dwa adresy maszyny: prywatny oraz publiczny. O ile p
 ```bash
 terraform output
 ```
+
+UWAGA! Warto odświeżyć stan terraforma, szczególnie po dłuższej przerwie od pracy.
 
 ### Konfiguracja remote ssh w VS Code
 

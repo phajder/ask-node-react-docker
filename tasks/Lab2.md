@@ -8,7 +8,7 @@
 
 ## Zadania
 
-## **UWAGA! W ćwiczeniu należy korzystać wyłącznie z systemów Linuxowych**
+**UWAGA! W ćwiczeniu należy korzystać wyłącznie z systemów Linuxowych**
 
 Aby wykonać ćwiczenie, potrzebne będą pliki Dockerfile z Lab1 w aplikacjach [serwerowej](/server/Dockerfile) oraz [klienckiej](/client/Dockerfile).
 
@@ -40,8 +40,8 @@ Zbuduj produkcyjną wersję aplikacji frontendowej:
 
 1. Stwórz nowy Dockerfile, w którym aplikacja zostanie uruchomiona w wersji produkcyjnej.
 2. Wykorzystaj [multi-stage build](https://docs.docker.com/build/building/multi-stage/), by zbudować aplikację:
-   - Stage 1: node. Należy zbudować wersję produkcyjną poleceniem `npm run build`.
-   - Stage 2: nginx. Wykorzystaj szablon pliku konfiguracyjnego [nginx.conf](/client/nginx.conf.template). Zwróć uwagę na zmienne środowiskowe, które należy ustawić.
+   - Stage 1: [node](https://hub.docker.com/_/node). Należy zbudować wersję produkcyjną poleceniem `npm run build`.
+   - Stage 2: [nginx](https://hub.docker.com/_/nginx). Wykorzystaj szablon pliku konfiguracyjnego [nginx.conf](/client/nginx.conf.template). Zwróć uwagę na zmienne środowiskowe, które należy ustawić.
 3. Docelowy plik nginx.conf powinien znaleźć się w kontenerze pod ścieżką `/etc/nginx/nginx.conf`. Tip: wykorzystaj zmienną środowiskową NGINX_ENVSUBST_OUTPUT_DIR.
 4. Do testowania prawidłowości działania kontenera opartego o nowy obraz można zakomentować sekcję upstream.
 5. Zweryfikuj prawidłowość działania aplikacji, wchodząc w przeglądarkę na port 80 pod adresem maszyny, na której jest ona hostowana.

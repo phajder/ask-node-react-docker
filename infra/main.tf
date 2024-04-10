@@ -62,6 +62,11 @@ resource "aws_instance" "ask_docker_ec2" {
   key_name               = aws_key_pair.main.key_name
   vpc_security_group_ids = [aws_security_group.ask_docker_sg.id]
   user_data              = file("install_docker.sh")
+  root_block_device {
+    volume_size = 100 # in GB
+    volume_type = "gp3"
+    encrypted   = false
+  }
   tags = {
     Name = "${format("ask-docker-%d", count.index)}"
   }

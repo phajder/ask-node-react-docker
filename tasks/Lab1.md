@@ -53,7 +53,7 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
 
 ### Aplikacja backendowa [2 pkt]
 
-1. Pobierz obraz nodejs z repozytorium DockerHub na maszynę. Wersja powinna być nie wyższa niż 16.
+1. Pobierz obraz nodejs z repozytorium DockerHub na maszynę. Najlepiej wybrać tag _lts_.
 2. W katalogu server stwórz plik Dockerfile i uzupełnij go odpowiednimi instrukcjami, pozwalającymi na uruchomienie aplikacji.
    - Jako polecenie wykonawcze (CMD/ENTRYPOINT) wskaż `npm run dev`.
    - **Nie kopiuj** kodu źródłowego!
@@ -71,7 +71,7 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
 
 ### Aplikacja frontendowa [2 pkt]
 
-1. Pobierz lub wykorzystaj obraz nodejs z poprzedniej części. Wersja powinna być nie wyższa niż 16.
+1. Pobierz lub wykorzystaj obraz nodejs z poprzedniej części. Najlepiej wybrać tag _lts_.
 2. W katalogu client stwórz plik Dockerfile i uzupełnij go odpowiednimi instrukcjami pozwalającymi na uruchomienie.
    - Jako polecenie wykonawcze (CMD/ENTRYPOINT) wskaż `npm start`
    - **Nie kopiuj** kodu źródłowego!
