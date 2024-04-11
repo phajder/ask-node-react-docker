@@ -126,6 +126,14 @@ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
 
 Wygenerowany klucz można przenosić między maszynami i używać go do łączenia się z tworzoną wirtualką.
 
+### Klonowanie repozytorium
+
+Przed uruchomieniem inicjalizacji terraforma należy skopiować repozytorium poleceniem:
+
+```bash
+git clone https://github.com/phajder/ask-node-react-docker
+```
+
 ### Inicjalizacja terraforma
 
 W celu uruchomienia skryptu, w katalogu [infra](/infra) należy zainicjalizować terraforma poleceniem _init_.
