@@ -36,7 +36,7 @@ echo "export PATH=\$PATH:~/.local/bin" >> ~/.bashrc
 
 Należy zrestartować sesję, by polecenie zadziałało, np. ponowne włączenie terminala lub przeładowanie strony w przeglądarce (AWS Academy). Można też użyć polecenia `source ~/.bashrc`.
 
-**UWAGA!** W przypadku wykorzystywania innej powłoki niż bash konieczna jest zmiana pliku rc na odpowiedni, np. `~/.zshrc` dla zsh.
+**UWAGA! W przypadku wykorzystywania innej powłoki niż bash konieczna jest zmiana pliku rc na odpowiedni, np. `~/.zshrc` dla zsh.**
 
 ### Weryfikacja poprawności działania terraforma
 
@@ -118,7 +118,7 @@ ssh-keygen -t ed25519
 
 Klucz domyślnie znajduje się w katalogu ~/.ssh i będzie mieć nazwę id_ed25519, które można zmienić w trakcie generacji lub wykorzystując opcję -f. **W dalszej części opisu wykorzystano nazwę domyślną.**
 
-**UWAGA!** Na platformie AWS Academy klucz generuje się do _złego_ katalogu - katalog domowy (~) do pracy jest podmontowany do lokalizacji, która różni się od /home, gdzie keygen zapisuje parę kluczy. Wówczas warto skorzystać z opcji -f, które wygeneruje ją we _właściwym_ katalogu.
+**UWAGA! Na platformie AWS Academy klucz generuje się do _złego_ katalogu - katalog domowy (~) do pracy jest podmontowany do lokalizacji, która różni się od /home, gdzie keygen zapisuje parę kluczy. Wówczas warto skorzystać z opcji -f, które wygeneruje ją we _właściwym_ katalogu.**
 
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
@@ -191,13 +191,15 @@ Jeżeli polecenie działa poprawnie, można rozpocząć pracę z maszyną.
 
 ## Niszczenie infrastruktury
 
-Po zakończonej pracy należy zniszczyć stworzone zasoby, by nie zostały naliczone dodatkowe opłaty. W tym celu należy wywołać polecenie _destroy_.
+Po zakończonej pracy (najlepiej po ostatnich labach) należy zniszczyć stworzone zasoby, by nie zostały naliczone dodatkowe opłaty. W tym celu należy wywołać polecenie _destroy_.
 
 ```bash
 terraform destroy
 ```
 
-**UWAGA!** W wyniku wykonania tego polecenia zniszczone zostaną wszystkie stworzone przez terraforma zasoby, włącznie z zawartymi na nich danymi. Nie jest możliwe ich przywrócenie, więc należy kończyć pracę, upewniwszy się wcześniej, że wszystkie dane zostały skopiowane na inną maszynę.
+Polecenie to można wykorzystać również w sytuacji, gdy z maszyną są problemy i to ona powoduje problemy w wykonaniu ćwiczenia. Po tym należy ponownie stworzyć maszynę poleceniem _apply_.
+
+**UWAGA! W wyniku wykonania tego polecenia zniszczone zostaną wszystkie stworzone przez terraforma zasoby, włącznie z zawartymi na nich danymi. Nie jest możliwe ich przywrócenie, więc należy kończyć pracę, upewniwszy się wcześniej, że wszystkie dane zostały skopiowane na inną maszynę.**
 
 ## Dodatkowe informacje
 
@@ -205,7 +207,7 @@ terraform destroy
 
 Domyślnie wybranym obrazem maszyny jest ubuntu 22.04 LTS. By to zmienić, należy zmienić wartość zmiennej _ec2_ami_ podczas wykonania polecenia _apply_ lub w pliku [variables](./variables.tf#L21). AMI ID można znaleźć na platformie AWS, podczas tworzenia maszyny wirtualnej w usłudze EC2.
 
-**UWAGA!** [Skrypt](./install_docker.sh) do automatycznej instalacji dockera został napisany wyłącznie pod systemy ubuntu, debian oraz amazon linux 2023. W innych przypadkach należy samodzielnie zainstalować system, zgodnie z [dokumentacją](https://docs.docker.com/engine/install/).
+**UWAGA! [Skrypt](./install_docker.sh) do automatycznej instalacji dockera został napisany wyłącznie pod systemy ubuntu, debian oraz amazon linux 2023. W innych przypadkach należy samodzielnie zainstalować system, zgodnie z [dokumentacją](https://docs.docker.com/engine/install/).**
 
 ### Domyślni użytkownicy w obrazach AWS
 
@@ -217,16 +219,6 @@ Jeżeli maszyna została stworzona z innym systemem niż zdefiniowany w konfigur
 | Ubuntu 22.04 LTS   | ubuntu       |
 | Debian 12 Bookworm | admin        |
 
-### Odświeżanie stanu terraforma
-
-Po restarcie maszyny wirtualnej lub po ponownym włączeniu labu na AWS Academy, istnieje możliwość desynchronizacji stanu terraforma z chmurą AWS. By go odświeżyć, należy wykonać polecenie:
-
-```bash
-terraform refresh -var "public_key=$(<id_ed25519.pub)"
-```
-
-UWAGA! Należy wskazać odpowiednią ścieżkę do klucza publicznego!
-
 ### Pobieranie zmiennych terraforma
 
 Skrypt jako wyjście zwraca dwa adresy maszyny: prywatny oraz publiczny. O ile pierwszy jest niezmienny, o tyle drugi może zmienić się w dowolnym momencie, np. w wyniku restartu interfejsu, maszyny, jej migracji lub innych operacji po stronie dostawcy. By uzyskać te wartości można w dowolnym momencie wywołać polecenie _output_.
@@ -235,7 +227,27 @@ Skrypt jako wyjście zwraca dwa adresy maszyny: prywatny oraz publiczny. O ile p
 terraform output
 ```
 
-UWAGA! Warto odświeżyć stan terraforma, szczególnie po dłuższej przerwie od pracy.
+**UWAGA! Warto odświeżyć stan terraforma, szczególnie po dłuższej przerwie od pracy.**
+
+### Odświeżanie stanu terraforma
+
+Po restarcie maszyny wirtualnej lub po ponownym włączeniu labu na AWS Academy, istnieje możliwość desynchronizacji stanu terraforma z chmurą AWS. By go odświeżyć, należy wykonać polecenie:
+
+```bash
+terraform refresh -var "public_key=$(< ~/.ssh/id_ed25519.pub)"
+```
+
+UWAGA! Należy wskazać odpowiednią ścieżkę do klucza publicznego!
+
+### Kopiowanie klucza z AWS Academy na własną maszynę
+
+By wypisać klucz na ekran terminala, należy wykonać polecenie:
+
+```bash
+cat ~/.ssh/id_ed25519
+```
+
+**UWAGA! Na Windowsie należy dodać na końcu klucza prywatnego dodatkowy znak końca linii (enter).**
 
 ### Konfiguracja remote ssh w VS Code
 
@@ -248,11 +260,11 @@ W celu uproszczenia pracy z kodem, warto skonfigurować swoje IDE do pracy na zd
 
 Jeżeli na liście nie ma żadnego hosta, należy go dodać poprzez opcje (zębatka przy _ssh targets_). Otworzy to plik ~/.ssh/config. Opis konfiguracji pojedynczego wpisu zawarto poniżej.
 
-**UWAGA!** Takie podejście instaluje komponenty serwerowe VS Code na zdalnej maszynie. Oznacza to, że wszelkie wtyczki do pracy z kodem muszą zostać tam zainstalowane, niezależnie od konfiguracji lokalnej.
+**UWAGA! Takie podejście instaluje komponenty serwerowe VS Code na zdalnej maszynie. Oznacza to, że wszelkie wtyczki do pracy z kodem muszą zostać tam zainstalowane, niezależnie od konfiguracji lokalnej.**
 
 ### Config klienta ssh do uproszczonego połączenia
 
-W celu skrócenia/uproszczenia polecenia nawiązującego połączenie ssh z maszyną, można stworzyć config, w którym zawarte zostaną wszystkie niezbędne informacje. Jest to plik ~/.ssh/config. Należy dodać do niego następujący wpis:
+W celu skrócenia/uproszczenia polecenia nawiązującego połączenie ssh z maszyną, można stworzyć config, w którym zawarte zostaną wszystkie niezbędne informacje. Jest to plik `~/.ssh/config`. Należy dodać do niego następujący wpis:
 
 ```
 Host ask-ubuntu
@@ -265,3 +277,5 @@ Host ask-ubuntu
 Za _\<IP\>_ należy podstawić adres IP maszyny. Należy również podmienić ścieżkę _IdentityFile_ do klucza prywatnego. Jeżeli system na wirtualce jest inny niż ubuntu, trzeba zmienić również nazwę użytkownika.
 
 Posiadając taki wpis w pliku konfiguracyjnym połączenie z maszyną można wykonać za pomocą polecenia `ssh ask-ubuntu`.
+
+**UWAGA! Adres IP będzie się zmieniać po ponownym wystartowaniu labu na AWS Academy. Należy pamiętać o jego każdorazowej zmianie w pliku `~/.ssh/config`.**
