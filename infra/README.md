@@ -102,7 +102,7 @@ region = us-east-1
 
 Jeżeli w katalogu domowym znajdują się inne profile do AWS CLI, należy zmienić nazwę, aby były one unikalne.
 
-**UWAGA!** Klucz ten jest sesyjny - po upływie czasu lub deaktywacji labu na platformie AWS Academy są one zmieniane i proces kopiowania należy przeprowadzić ponownie, przed przystąpieniem do tworzenia infrastruktury.
+**UWAGA! Klucz ten jest sesyjny - po upływie czasu lub deaktywacji labu na platformie AWS Academy są one zmieniane i proces kopiowania należy przeprowadzić ponownie, przed przystąpieniem do tworzenia infrastruktury.**
 
 ## Konfiguracja środowiska deweloperskiego
 
@@ -125,6 +125,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
 ```
 
 Wygenerowany klucz można przenosić między swoimi sprzętami (komputer stacjonarny, laptop) i używać go do łączenia się z tworzoną wirtualką.
+
 **UWAGA DLA WINDOWSA! Kopiując zawartość klucza, należy na końcu dodać dodatkowy znak końca linii. Inaczej występować będą błędy odczytu.**
 
 ### Klonowanie repozytorium
@@ -204,22 +205,6 @@ Polecenie to można wykorzystać również w sytuacji, gdy z maszyną są proble
 
 ## Dodatkowe informacje
 
-### Zmiana domyślnego obrazu maszyny
-
-Domyślnie wybranym obrazem maszyny jest ubuntu 22.04 LTS. By to zmienić, należy zmienić wartość zmiennej _ec2_ami_ podczas wykonania polecenia _apply_ lub w pliku [variables](./variables.tf#L21). AMI ID można znaleźć na platformie AWS, podczas tworzenia maszyny wirtualnej w usłudze EC2.
-
-**UWAGA! [Skrypt](./install_docker.sh) do automatycznej instalacji dockera został napisany wyłącznie pod systemy ubuntu, debian oraz amazon linux 2023. W innych przypadkach należy samodzielnie zainstalować system, zgodnie z [dokumentacją](https://docs.docker.com/engine/install/).**
-
-### Domyślni użytkownicy w obrazach AWS
-
-Jeżeli maszyna została stworzona z innym systemem niż zdefiniowany w konfiguracji, należy wybrać właściwą nazwę domyślnego użytkownika.
-
-| **OS**             | **Username** |
-| :----------------- | :----------- |
-| Amazon Linux 2023  | ec2-user     |
-| Ubuntu 22.04 LTS   | ubuntu       |
-| Debian 12 Bookworm | admin        |
-
 ### Pobieranie zmiennych terraforma
 
 Skrypt jako wyjście zwraca dwa adresy maszyny: prywatny oraz publiczny. O ile pierwszy jest niezmienny, o tyle drugi może zmienić się w dowolnym momencie, np. w wyniku restartu interfejsu, maszyny, jej migracji lub innych operacji po stronie dostawcy. By uzyskać te wartości można w dowolnym momencie wywołać polecenie _output_.
@@ -280,3 +265,19 @@ Za _\<IP\>_ należy podstawić adres IP maszyny. Należy również podmienić ś
 Posiadając taki wpis w pliku konfiguracyjnym połączenie z maszyną można wykonać za pomocą polecenia `ssh ask-ubuntu`.
 
 **UWAGA! Adres IP będzie się zmieniać po ponownym wystartowaniu labu na AWS Academy. Należy pamiętać o jego każdorazowej zmianie w pliku `~/.ssh/config`.**
+
+### Zmiana domyślnego obrazu maszyny
+
+Domyślnie wybranym obrazem maszyny jest ubuntu 22.04 LTS. By to zmienić, należy zmienić wartość zmiennej _ec2_ami_ podczas wykonania polecenia _apply_ lub w pliku [variables](./variables.tf#L21). AMI ID można znaleźć na platformie AWS, podczas tworzenia maszyny wirtualnej w usłudze EC2.
+
+**UWAGA! [Skrypt](./install_docker.sh) do automatycznej instalacji dockera został napisany wyłącznie pod systemy ubuntu, debian oraz amazon linux 2023. W innych przypadkach należy samodzielnie zainstalować system, zgodnie z [dokumentacją](https://docs.docker.com/engine/install/).**
+
+### Domyślni użytkownicy w obrazach AWS
+
+Jeżeli maszyna została stworzona z innym systemem niż zdefiniowany w konfiguracji, należy wybrać właściwą nazwę domyślnego użytkownika.
+
+| **OS**             | **Username** |
+| :----------------- | :----------- |
+| Amazon Linux 2023  | ec2-user     |
+| Ubuntu 22.04 LTS   | ubuntu       |
+| Debian 12 Bookworm | admin        |

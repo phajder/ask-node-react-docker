@@ -16,7 +16,7 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
 
 ### Przygotowanie platformy [1 pkt]
 
-1. Stwórz maszynę wirtualną do pracy. Skorzystaj ze dostarczonego [opisu](/infra/README.md).
+1. Stwórz maszynę wirtualną do pracy. Skorzystaj z dostarczonego [opisu](/infra/README.md).
 2. Jeżeli wszystkie czynności zostały wykonane prawidłowo, poniższe polecenie powinno wykonać się bez błędów i zwrócić pustą tabelę z uruchomionymi kontenerami.
 
    ```bash
@@ -33,7 +33,7 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
 
 ### Baza danych [2 pkt]
 
-1. Pobierz obraz bazy danych z repozytorium DockerHub na maszynę. Wspierane przez aplikację bazy to mysql lub mariadb.
+1. Pobierz obraz bazy danych z repozytorium [DockerHub](https://hub.docker.com/) na maszynę. Wspierane przez aplikację bazy to mysql lub mariadb.
 2. Uruchom bazę danych w kontenerze, inicjalizując ją danymi ze skryptu [db.sql](/db/db.sql). Są trzy możliwe rozwiązania:
    - Stworzenie kontenera z bazą a następnie wczytanie skryptu z wykorzystaniem polecenia docker exec. Przykład dla mysql:
      ```bash
@@ -53,8 +53,8 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
 
 ### Aplikacja backendowa [2 pkt]
 
-1. Pobierz obraz nodejs z repozytorium DockerHub na maszynę. Najlepiej wybrać tag _lts_.
-2. W katalogu server stwórz plik Dockerfile i uzupełnij go odpowiednimi instrukcjami, pozwalającymi na uruchomienie aplikacji.
+1. Pobierz obraz Node z repozytorium [DockerHub](https://hub.docker.com/_/node) na maszynę. Najlepiej wybrać tag _lts_.
+2. W katalogu server uzupełnij plik [Dockerfile](/server/Dockerfile) odpowiednimi instrukcjami, pozwalającymi na uruchomienie aplikacji.
    - Jako polecenie wykonawcze (CMD/ENTRYPOINT) wskaż `npm run dev`.
    - **Nie kopiuj** kodu źródłowego!
 3. Zbuduj obraz poleceniem `docker build -t <obraz_backendu>:0.1 .` w katalogu server.
@@ -71,8 +71,8 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
 
 ### Aplikacja frontendowa [2 pkt]
 
-1. Pobierz lub wykorzystaj obraz nodejs z poprzedniej części. Najlepiej wybrać tag _lts_.
-2. W katalogu client stwórz plik Dockerfile i uzupełnij go odpowiednimi instrukcjami pozwalającymi na uruchomienie.
+1. Pobierz lub wykorzystaj obraz Node z poprzedniej części. Najlepiej wybrać tag _lts_.
+2. W katalogu client uzupełnij plik [Dockerfile](/client/Dockerfile) odpowiednimi instrukcjami pozwalającymi na uruchomienie.
    - Jako polecenie wykonawcze (CMD/ENTRYPOINT) wskaż `npm start`
    - **Nie kopiuj** kodu źródłowego!
 3. Zbuduj obraz poleceniem `docker build -t <obraz_frontendu>:0.1 .` w katalogu client.
