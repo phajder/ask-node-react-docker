@@ -124,7 +124,8 @@ Klucz domyślnie znajduje się w katalogu ~/.ssh i będzie mieć nazwę id_ed255
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519
 ```
 
-Wygenerowany klucz można przenosić między maszynami i używać go do łączenia się z tworzoną wirtualką.
+Wygenerowany klucz można przenosić między swoimi sprzętami (komputer stacjonarny, laptop) i używać go do łączenia się z tworzoną wirtualką.
+**UWAGA DLA WINDOWSA! Kopiując zawartość klucza, należy na końcu dodać dodatkowy znak końca linii. Inaczej występować będą błędy odczytu.**
 
 ### Klonowanie repozytorium
 
