@@ -113,6 +113,7 @@ Tip: Do wykonania tej sekcji przydatne będzie utworzenie własnej sieci w docke
 3. Sprawozdanie nie musi być bardzo szczegółowe, jednak powinno odzwierciedlać sekwencję wykonywanych kroków oraz uzasadnienie, co i dlaczego się stało.
 4. Sprawozdanie należy umieścić na platformie UPEL do następnych zajęć.
 5. Pozostałe dwa laboratoria wymagają wiedzy z tego ćwiczenia, gdyż będą wykorzystywać tą samą aplikację.
+6. Jeżeli aplikacja kliencka w trybie deweloperskim zwraca komunikat _Invalid host header_, wówczas przy uruchomieniu kontenera należy dodać opcję `DANGEROUSLY_DISABLE_HOST_CHECK=true`.
 
 ---
 
