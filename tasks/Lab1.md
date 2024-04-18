@@ -83,7 +83,7 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
    - Zmapuj kod źródłowy aplikacji z katalogu src jako wolumin do kontenera (-v).
    - Zmapuj katalog public jako wolumin do kontenera (-v).
 5. Sprawdź, czy kontener jest uruchomiony i zweryfikuj poprawność jego działania, wchodząc pod adres maszyny (lub localhost przy port-forwardingu z VS Code) na port 3333.
-6. Zmodyfikuj tekst dowolnego z dwóch przycisków: [_Load data_](/client/src/components/Layout/Layout.tsx#L30) lub [_Flush data_](/client/src/components/Layout/Layout.tsx#L35). Zapisz plik.
+6. Zmodyfikuj tekst dowolnego z dwóch przycisków: [_Load data_](/client/src/components/Layout/Layout.tsx#L37) lub [_Flush data_](/client/src/components/Layout/Layout.tsx#L40). Zapisz plik.
 7. Jeżeli wyświetli się logo Reacta i dwa przyciski (mogą być ukryte po naciśnięciu logo) ze zmienionym tekstem, czynności zostały wykonane prawidłowo.
 
 ---
