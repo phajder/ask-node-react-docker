@@ -15,6 +15,12 @@ variable "react_port" {
   default     = 3333
 }
 
+variable "nginx_port" {
+  description = "Port for exposing nginx production server"
+  type        = number
+  default     = 80
+}
+
 variable "ec2_ami" {
   description = "Selected AMI for vm's image"
   type        = string
