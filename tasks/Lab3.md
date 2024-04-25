@@ -67,3 +67,8 @@ Skonfiguruj Traefika i udostępniane serwisy, by włączyć SSL na obydwu domena
 3. W serwisach dodaj odpowiednie domeny w konfiguracji tls. Uwzględnij również możliwość wprowadzenia subdomen (_\*.nazwa_domeny.duckdns.org_).
 4. Sprawdź działanie aplikacji klienckiej na publicznej domenie oraz prawidłowość certyfikatu SSL.
 5. Sprawdź działanie phpmyadmina na lokalnej domenie oraz prawidłowość certyfikatu SSL.
+
+---
+
+## Dodatkowe informacje
+1. Jeżeli phpmyadmin zwraca błąd 404 (/ oraz /phpmyadmin)

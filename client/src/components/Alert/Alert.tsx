@@ -20,7 +20,7 @@ const Alert: React.FC<AlertProps> = ({ title, message, timeout, handleDismiss })
       }, timeout * 1000);
       return () => clearTimeout(timer);
     }
-  }, []);
+  });
   return (
     <AlertShadCn className="py-4">
       <CrossCircledIcon className="h-6 w-6" />

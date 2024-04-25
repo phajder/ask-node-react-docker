@@ -15,10 +15,16 @@ variable "react_port" {
   default     = 3333
 }
 
-variable "nginx_port" {
+variable "http_port" {
   description = "Port for exposing nginx production server"
   type        = number
   default     = 80
+}
+
+variable "https_port" {
+  description = "Port for exposing traefik SSL endpoint"
+  type        = number
+  default     = 443
 }
 
 variable "ec2_ami" {
