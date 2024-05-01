@@ -63,7 +63,11 @@ Dodaj usługę phpmyadmin do własnego pliku [compose.yaml](/compose.yaml):
 Skonfiguruj Traefika i udostępniane serwisy, by włączyć SSL na obydwu domenach z wykorzystaniem certyfikatow Let's Encrypt:
 
 1. Wykorzystaj DNS Challenge oraz DuckDNS jako providera. Zmienne środowiskowe są dostępne w dokumentacji [kliencie Let's Encrypt](https://go-acme.github.io/lego/dns/duckdns/). W większości przypadków wystarczy wyłacznie zmienna DUCKDNS_TOKEN.
-2. **Stwórz wolumen, by trwale przechować wygenerowane certyfikaty!** W przeciwnym przypadku po restarcie compose zostaną one utracone. Let's Encrypt ma [limit](https://letsencrypt.org/docs/rate-limits/) na liczbę wydanych certyfikatów na domenę!
-3. W serwisach dodaj odpowiednie domeny w konfiguracji tls. Uwzględnij również możliwość wprowadzenia subdomen (_\*.nazwa_domeny.duckdns.org_).
-4. Sprawdź działanie aplikacji klienckiej na publicznej domenie oraz prawidłowość certyfikatu SSL.
-5. Sprawdź działanie phpmyadmina na lokalnej domenie oraz prawidłowość certyfikatu SSL.
+2. Do testów wykorzystaj caserver stagingowy: https://acme-staging-v02.api.letsencrypt.org/directory. Można go podać podczas konfiguracji resolvera w traefiku poprzez podanie tego urla do labelki `traefik.http.certificatesresolvers.myresolver.acme.caserver` (lub odpowiedniej w pliku [traefik.yaml](/proxy/traefik.yaml)).
+3. **Stwórz wolumen, by trwale przechować wygenerowane certyfikaty!** W przeciwnym przypadku po restarcie compose zostaną one utracone. Let's Encrypt ma [limit](https://letsencrypt.org/docs/rate-limits/) na liczbę wydanych certyfikatów na domenę!
+4. W serwisach dodaj odpowiednie domeny w konfiguracji tls. Uwzględnij również możliwość wprowadzenia subdomen (_\*.nazwa_domeny.duckdns.org_).
+5. Sprawdź działanie aplikacji klienckiej na publicznej domenie oraz prawidłowość certyfikatu SSL.
+6. Sprawdź działanie phpmyadmina na lokalnej domenie oraz prawidłowość certyfikatu SSL.
+
+## TODO:
+1. Screenshot z nieprawidłowym (traefik default) i prawidłowym (fake i real letsencrypt) certyfikatem w przeglądarce.
