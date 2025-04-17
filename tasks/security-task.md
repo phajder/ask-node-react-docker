@@ -45,3 +45,14 @@
     * https://securitylabs.datadoghq.com/articles/dirty-pipe-container-escape-poc/
     * https://github.com/DataDog/security-lab-pocs/pkgs/container/dirtypipe-container-breakout
     * Simple demo: https://github.com/DataDog/security-labs-pocs/tree/main/proof-of-concept-exploits/dirtypipe-container-breakout
+
+## Przydatne linki
+* https://sekurak.pl/leaky-vessels-nowa-seria-podatnosci-w-konteneryzacji/
+* https://www.wiz.io/blog/ingress-nginx-kubernetes-vulnerabilities
+* https://falco.org/docs/
+* https://falco.org/docs/concepts/rules/
+* https://github.com/opencontainers/runc
+* https://github.com/opencontainers/image-spec/blob/main/spec.md
+* https://docs.docker.com/engine/security/rootless/
+* https://docs.docker.com/engine/install/debian/
+* https://chatgpt.com/share/67f43400-f3f0-8001-aa05-e00d655194d9
