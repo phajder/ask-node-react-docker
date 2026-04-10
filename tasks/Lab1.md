@@ -96,7 +96,7 @@ Przydatne polecenia można znaleźć w [dockumentacji](https://docs.docker.com/e
    - Niektóre zmiany mogą wymagać ponownego stworzenia kontenera. Jeżeli to konieczne, usuń niewłaściwy i stwórz nowy.
 3. Zweryfikuj poprawność połączenia, odpytując endpoint /api/products. Powinien on zwrócić listę produktów. Jeżeli występuje błąd, wykorzystaj polecenie `docker logs`, by znaleźć przyczynę.
 4. Połącz ze sobą kontenery frontendu i backendu.
-   - Aplikacja wykorzystuje wewnętrzny serwer proxy. Adres backendu, do którego proxowane są zapytania znajduje się w pliku [package.json](/client/package.json#L9) klienta.
+   - Aplikacja wykorzystuje wewnętrzny serwer proxy. Adres backendu należy wskazać poprzez ustawienie zmiennej środowiskowej `REACT_APP_PROXY`.
    - Niektóre zmiany mogą wymagać ponownego stworzenia kontenera. Jeżeli to konieczne, usuń niewłaściwy i stwórz nowy.
 5. Zweryfikuj poprawność połączenia poprzez załadowanie danych przyciskiem _Load data_. Finalny rezultat:
    ![ui-preview](/res/ui-preview.png)
@@ -121,3 +121,4 @@ Tip: Do wykonania tej sekcji przydatne będzie utworzenie własnej sieci w docke
 
 1. https://docs.docker.com/network/network-tutorial-standalone/
 2. https://www.digitalocean.com/community/questions/how-to-ping-docker-container-from-another-container-by-name
+3. https://create-react-app.dev/docs/proxying-api-requests-in-development
